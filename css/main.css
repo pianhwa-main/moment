@@ -119,7 +119,7 @@ body { background: var(--body-bg); user-select: none; }
     content:"";
 	width: 20px;
 	height: 20px;
-	background-image:url(moment/image/link_ico.png);
+	background-image:url(https://pianhwa-main.github.io/moment/image/link_ico.png);
 	background-size: 18px auto;
 	background-repeat:no-repeat;
 	background-position:center center;
@@ -191,5 +191,6 @@ body { background: var(--body-bg); user-select: none; }
     overflow: hidden;
 
 }
+
 
 
