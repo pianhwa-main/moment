@@ -1,0 +1,192 @@
+/* 외부 CSS 불러오기 */
+@import url(https://meyerweb.com/eric/tools/css/reset/reset.css);
+@import url(https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css);
+
+
+/* 전역 변수 설정 */
+:root {
+    --body-bg: #eee;            /* Default: #eee */
+    --container-bg: #fff;       /* Default: #fff */
+    --color: #444;           /* Default: #171717 */
+
+    --width: 480px;               /* Default: 640px */
+    --height: 640px;              /* Default: 480px */
+
+    --font-Hack: .8em / 1.8 Hack, monospace;    /* Default: .8em / 1.8 Hack, monospace */
+}
+
+
+/* 스타일 */
+body { background: var(--body-bg); user-select: none; }
+
+#container {
+    display: flex;
+
+    position: absolute;
+    top: 6em; left: 50%;
+    transform: translate(-50%, 0);
+
+    background: var(--container-bg);
+
+    border: none;
+    border-radius: 1.2em;
+    box-shadow: 2.6px 2.6px 12px 1px rgba(0, 0, 0, 0.3);
+
+    overflow: hidden;
+}
+
+.book {
+    width: calc(var(--width) - 80px);
+    height: calc(var(--height) - 80px);
+
+    padding: 40px;
+    margin: 20px;
+
+    background-color: transparent;
+    border: none;
+
+    font: var(--font-Hack);
+    color: var(--color);
+    
+    resize: none;
+    outline: none;
+
+    overflow-y: auto;
+}
+.book::selection { background-color: #212121; color: #ccc; }
+.book::spelling-error { text-decoration: none; }
+.book::-webkit-scrollbar {
+    width: 5px;
+    border: 1px solid #212121;
+    border-radius: 5px;
+}
+.book::-webkit-scrollbar-thumb {
+    background-color: #474747;
+    border-radius: 5px;
+}
+
+#inner {
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translate(-50%, 0);
+    width: 1px;
+    height: calc(var(--height) + 60px);
+
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: blur(3px);
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+
+    user-select: none;
+}
+
+#preview > .header { position: relative; margin-bottom: .6em; }
+#preview > h1 { font-size: 2em; font-weight: bolder; margin-top: 1em; }
+#preview > h2 { font-size: 1.8em; font-weight: bold; margin-top: 1em; }
+#preview > h3 { font-size: 1.6em; font-weight: bold; margin-top: 1.6em; }
+#preview > h4 { font-size: 1.4em; font-weight: bold; margin-top: 2em; }
+#preview > h5 { font-size: 1.2em; font-weight: bold; margin-top: 2.8em; }
+#preview > h6 { font-size: 1.0em; font-weight: bold; margin-top: 3.6em; }
+
+#preview > .header::after {
+    content: "";
+    width: 100%; height: 0;
+    border-bottom: .1px solid rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 0;
+}
+#preview > h1::after { top: 1.6em; }
+#preview > h2::after { top: 1.7em; }
+#preview > h3::after { top: 1.7em; }
+#preview > h4::after { top: 1.8em; }
+#preview > h5::after { top: 1.8em; }
+#preview > h6::after { top: 1.8em; }
+
+#preview > p > em { font-style: italic; }
+#preview > p > strong { font-weight: bold; }
+
+#preview > ul > li { list-style-type: disc; margin-left: 2em; }
+#preview > p > a {
+    position: relative;
+    color: #171717;
+    text-decoration: none;
+    border: 1px solid #171717;
+    border-radius: 2em;
+
+    padding: .4em 1em .4em 2em;
+    line-height: 2.6em;
+}
+#preview > p > a::after {
+    content:"";
+	width: 20px;
+	height: 20px;
+	background-image:url(image/link_ico.png);
+	background-size: 18px auto;
+	background-repeat:no-repeat;
+	background-position:center center;
+	position:absolute;
+	left: .3em; top: 50%;
+    transform: translate(0, -50%);
+}
+
+#link_preview {
+    position: fixed;
+    display: flex; gap: 1.6em; flex-wrap: wrap;
+    top: 3em; left: 3em;
+
+    width: 360px;
+
+    z-index: 1;
+}
+
+#link_preview > div.link_preview {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 1.2em;
+
+    box-shadow: 2.6px 2.6px 12px 1px rgba(0, 0, 0, 0.3);
+
+    height: 220px; width: 140px;
+    font: var(--font-Hack);
+
+    overflow: hidden;
+    display: none;
+}
+#link_preview > div.link_preview.on { display: inline-block; }
+
+#link_preview > div.link_preview > img.link_image {
+    position: absolute;
+    top: 10px; left: 10px;
+
+    height: 120px; width: 120px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: calc(1.6em - 10px);
+    box-shadow: 0 0px 8px 1px rgba(0, 0, 0, 0.1);
+}
+
+#link_preview > div.link_preview > p.link_title {
+    position: absolute;
+    top: 140px; left: 16px;
+    height: 1.8em;
+    
+    font-size: 1em; font-weight: bold;
+    color: #474747;
+
+    overflow: hidden;
+}
+
+#link_preview > div.link_preview > p.link_url {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    font-size: .6em; line-height: 1.8em;
+    color: #676767;
+
+    height: 3.8em;
+    width: calc(100% - 32px);
+    word-wrap: break-word;
+
+    overflow: hidden;
+}
